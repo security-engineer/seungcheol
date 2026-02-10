@@ -1,0 +1,11 @@
+# Fast-DetectGPT requirements.txt (Docker용 - torch 제외)
+# PyTorch는 Dockerfile에서 CUDA 버전으로 이미 설치됨
+
+numpy
+transformers==4.28.1
+datasets==2.12.0
+matplotlib
+tqdm
+openai
+nltk
+scikit-learn
