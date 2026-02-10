@@ -1,0 +1,26 @@
+services:
+  dna-gpt:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: dna-gpt:latest
+    container_name: dna-gpt
+    environment:
+      - CUDA_VISIBLE_DEVICES=0
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+    ports:
+      - "7877:7877"
+    volumes:
+      - ./models:/app/models
+      - ./data:/app/data
+      - ./datasets:/app/datasets
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [ gpu ]
+    stdin_open: true
+    tty: true
+    command: /bin/bash

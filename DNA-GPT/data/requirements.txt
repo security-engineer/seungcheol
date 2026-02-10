@@ -1,0 +1,10 @@
+# DNA-GPT requirements.txt (Docker용 - torch 제외)
+# PyTorch는 Dockerfile에서 CUDA 버전으로 이미 설치됨
+
+rouge-score
+transformers>=4.28.1
+openai
+scikit-learn
+nltk
+spacy
+gradio
