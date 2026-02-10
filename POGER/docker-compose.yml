@@ -1,0 +1,25 @@
+services:
+  poger:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: poger:latest
+    container_name: poger
+    environment:
+      - CUDA_VISIBLE_DEVICES=0
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - HF_TOKEN=${HF_TOKEN}
+    volumes:
+      - ./models:/app/models
+      - ./data:/app/data
+      - ./datasets:/app/datasets
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [ gpu ]
+    stdin_open: true
+    tty: true
+    command: /bin/bash

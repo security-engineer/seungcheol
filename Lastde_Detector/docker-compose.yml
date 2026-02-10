@@ -1,0 +1,24 @@
+services:
+  lastde:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: lastde-detector:latest
+    container_name: lastde-detector
+    environment:
+      - CUDA_VISIBLE_DEVICES=0
+      - HF_TOKEN=${HF_TOKEN}
+    volumes:
+      - ./models:/app/models
+      - ./data:/app/data
+      - ./datasets:/app/datasets
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [ gpu ]
+    stdin_open: true
+    tty: true
+    command: /bin/bash
