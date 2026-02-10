@@ -59,4 +59,5 @@ ENV PYTHONPATH=/app/fast-detect-gpt:$PYTHONPATH
 ENV CUDA_VISIBLE_DEVICES=0
 
 EXPOSE 7860
+WORKDIR /workspace
 CMD ["/bin/bash"]

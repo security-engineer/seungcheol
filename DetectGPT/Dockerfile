@@ -71,4 +71,6 @@ RUN mkdir -p /tmp/hf_cache && chmod 777 /tmp/hf_cache
 ENV PYTHONPATH=/app/detect-gpt:$PYTHONPATH
 ENV CUDA_VISIBLE_DEVICES=0
 
+WORKDIR /workspace
+
 CMD ["/bin/bash"]
