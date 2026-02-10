@@ -1,0 +1,30 @@
+services:
+  seqxgpt:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: seqxgpt:latest
+    container_name: seqxgpt
+    environment:
+      - CUDA_VISIBLE_DEVICES=0
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - HF_TOKEN=${HF_TOKEN}
+      - LLAMA_MODEL_ID=${LLAMA_MODEL_ID:-meta-llama/Llama-3.1-8B-Instruct}
+    ports:
+      - "6006:6006"
+      - "6007:6007"
+      - "6008:6008"
+      - "6009:6009"
+      - "6010:6010"
+    volumes:
+      - ./:/app
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [ gpu ]
+    shm_size: '16gb'
+    stdin_open: true
+    tty: true
